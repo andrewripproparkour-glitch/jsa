@@ -1,0 +1,283 @@
+body {
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.topnavbar {
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  padding: 12px 0;
+  z-index: 1030;
+}
+.brandlogo {
+  font-weight: 800;
+  font-size: 24px;
+  color: #0d6efd !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #495057;
+}
+
+.nav-link.active {
+  color: #0d6efd !important;
+}
+.searchform {
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+.searchinput {
+  background-color: #f1f3f5;
+  border: 1px solid #dee2e6;
+  border-radius: 20px 0 0 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #212529;
+}
+
+.searchinput:focus {
+  background-color: #ffffff;
+  border-color: #0d6efd;
+  box-shadow: none;
+}
+
+.btnsearch {
+  background-color: #0d6efd;
+  border: 1px solid #0d6efd;
+  color: #ffffff;
+  border-radius: 0 20px 20px 0;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btnsearch:hover {
+  background-color: #0b5ed7;
+  border-color: #0b5ed7;
+}
+
+/* User Profile Section */
+.userprofile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #495057;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.userprofile strong {
+  color: #0d6efd;
+}
+
+.btnlogout {
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  color: #dc3545;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnlogout:hover {
+  background-color: #dc3545;
+  color: #ffffff;
+  border-color: #dc3545;
+}
+
+/* Main Content Spacing */
+.maincontent {
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+.welcomecard {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  color: #212529;
+}
+
+.welcometitle {
+  font-weight: 700;
+  color: #0d6efd;
+  margin-bottom: 12px;
+}
+
+.welcomesubtitle {
+  color: #6c757d;
+  font-size: 16px;
+}
+/* Product Grid & Card Styling */
+.section-title {
+  font-weight: 700;
+  color: #212529;
+  font-size: 20px;
+  margin: 0;
+}
+
+.viewall-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.product-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-img-box {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Tỷ lệ ảnh 4:3 */
+  overflow: hidden;
+  background-color: #f8f9fa;
+}
+
+.product-img-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #0d6efd;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.product-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-current {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.price-old {
+  font-size: 13px;
+  color: #adb5bd;
+  text-decoration: line-through;
+}
+
+.btn-add-cart {
+  margin-top: auto;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #212529;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px;
+  border-radius: 6px;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.btn-add-cart:hover {
+  background-color: #0d6efd;
+  color: #ffffff;
+  border-color: #0d6efd;
+}
+/* Promotional Carousel Styling */
+.promo-carousel {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.promo-img {
+  height: 340px;
+  object-fit: cover;
+  filter: brightness(0.85); /* Tối nhẹ ảnh để chữ nổi bật hơn */
+}
+
+.promo-carousel .carousel-caption {
+  bottom: 30px;
+  left: 40px;
+  right: 40px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 20px 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.promo-carousel .carousel-caption h2 {
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.promo-carousel .carousel-caption p {
+  font-size: 14px;
+  color: #e9ecef;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .promo-img {
+    height: 200px;
+  }
+}
+.nav-marketplace {
+  font-weight: 600;
+  color: #198754 !important; 
+  transition: color 0.2s ease;
+}
+
+.nav-marketplace:hover {
+  color: #157347 !important;
+}

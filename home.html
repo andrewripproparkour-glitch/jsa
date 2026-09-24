@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eBuy - Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg topnavbar fixed-top">
+      <div class="container">
+        <a class="navbar-brand brandlogo" href="#">eBuy</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav me-3">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-marketplace" href="#">Marketplace</a>
+            </li>
+          </ul>
+          <form class="d-flex searchform mx-lg-auto my-2 my-lg-0" role="search">
+            <input
+              class="form-control searchinput"
+              type="search"
+              placeholder="Search products, brands, categories..."
+              aria-label="Search"
+            />
+            <button class="btnsearch" type="submit">Search</button>
+          </form>
+
+          <div class="userprofile ms-lg-3">
+            <span>Welcome, <strong id="displayuser">User</strong></span>
+            <a href="login.html" id="btnlogout" class="btnlogout">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="maincontent container">
+      <!-- Banner Chào Mừng -->
+      <div class="welcomecard text-center p-4 mb-4">
+        <h1 class="welcometitle">Welcome back to eBuy!</h1>
+        <p class="welcomesubtitle">
+          Explore today's featured items and exclusive deals for you.
+        </p>
+      </div>
+      <div
+        id="promoCarousel"
+        class="carousel slide promo-carousel mb-5 carousel-fade"
+        data-bs-ride="carousel"
+        data-bs-interval="4000"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#promoCarousel"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#promoCarousel"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#promoCarousel"
+            data-bs-slide-to="2"
+          ></button>
+        </div>
+        <div class="carousel-inner rounded-4 overflow-hidden shadow-sm">
+          <div class="carousel-item active">
+            <img
+              src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200"
+              class="d-block w-100 promo-img"
+              alt="Big Sale Discounts"
+            />
+            <div class="carousel-caption d-none d-md-block text-start">
+              <span class="badge bg-danger mb-2">LIMITED TIME</span>
+              <h2 class="fw-bold text-white">MEGA SALE UP TO 50% OFF</h2>
+              <p>
+                Grab your favorite electronics and fashion items before sold
+                out!
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200"
+              class="d-block w-100 promo-img"
+              alt="Fashion Discount"
+            />
+            <div class="carousel-caption d-none d-md-block text-start">
+              <span class="badge bg-warning text-dark mb-2">NEW ARRIVALS</span>
+              <h2 class="fw-bold text-white">Trending Fashion Deals</h2>
+              <p>Upgrade your style with top global fashion brands today.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=1200"
+              class="d-block w-100 promo-img"
+              alt="Tech Gadgets Promotion"
+            />
+            <div class="carousel-caption d-none d-md-block text-start">
+              <span class="badge bg-primary mb-2">TECH WEEK</span>
+              <h2 class="fw-bold text-white">Best Tech & Gadgets</h2>
+              <p>
+                Exclusive voucher discounts on smart accessories & audio gear.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#promoCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#promoCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="section-title">Featured Products</h3>
+        <a href="#" class="viewall-link">View all &rarr;</a>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="product-img-box">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600"
+                alt="Headphones"
+              />
+              <span class="badge-tag">Sale</span>
+            </div>
+            <div class="product-details">
+              <h5 class="product-title">Wireless Headphones</h5>
+              <div class="product-price">
+                <span class="price-current">$99.00</span>
+                <span class="price-old">$129.00</span>
+              </div>
+              <a href="sanpham1.html" class="btn-add-cart">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="product-img-box">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600"
+                alt="Smart Watch"
+              />
+            </div>
+            <div class="product-details">
+              <h5 class="product-title">Smart Fitness Watch</h5>
+              <div class="product-price">
+                <span class="price-current">$149.00</span>
+              </div>
+              <button class="btn-add-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 3 -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="product-img-box">
+              <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600"
+                alt="Running Shoes"
+              />
+              <span class="badge-tag bg-danger">Hot</span>
+            </div>
+            <div class="product-details">
+              <h5 class="product-title">Nike Sports Shoes</h5>
+              <div class="product-price">
+                <span class="price-current">$120.00</span>
+                <span class="price-old">$150.00</span>
+              </div>
+              <button class="btn-add-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sản phẩm 4 -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="product-img-box">
+              <img
+                src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=600"
+                alt="Gaming Headset"
+              />
+            </div>
+            <div class="product-details">
+              <h5 class="product-title">RGB Gaming Headset</h5>
+              <div class="product-price">
+                <span class="price-current">$79.50</span>
+              </div>
+              <button class="btn-add-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedUser = localStorage.getItem("currentuser");
+        if (savedUser) {
+          document.getElementById("displayuser").textContent = savedUser;
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+
+      document
+        .getElementById("btnlogout")
+        .addEventListener("click", function () {
+          localStorage.removeItem("currentuser");
+        });
+    </script>
+  </body>
+</html>

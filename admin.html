@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eBuy - Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg topnavbar fixed-top">
+      <div class="container">
+        <a class="navbar-brand brandlogo" href=""
+          >eBuy <span class="badge bg-dark fs-6 ms-1">Admin</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="">Home Site</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Products</a>
+            </li>
+          </ul>
+
+          <div class="userprofile ms-lg-3">
+            <span>Admin: <strong id="displayuser">Admin</strong></span>
+            <a href="login.html" id="btnlogout" class="btnlogout">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Admin Container -->
+    <div class="maincontent container" style="margin-top: 90px">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold m-0">Admin Control Panel</h3>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="row g-3 mb-5">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm p-3 bg-white">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted small d-block fw-semibold"
+                  >MARKETPLACE ITEMS</span
+                >
+                <h2 class="fw-bold m-0 mt-1" id="statProducts">0</h2>
+              </div>
+              <div class="bg-light p-3 rounded text-primary fs-3">
+                <i class="bi bi-box-seam"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm p-3 bg-white">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted small d-block fw-semibold"
+                  >TOTAL REVIEWS</span
+                >
+                <h2 class="fw-bold m-0 mt-1" id="statReviews">0</h2>
+              </div>
+              <div class="bg-light p-3 rounded text-warning fs-3">
+                <i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm p-3 bg-white">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted small d-block fw-semibold"
+                  >CURRENT USER SESSION</span
+                >
+                <h4 class="fw-bold m-0 mt-2 text-truncate" id="statUser">
+                  Active
+                </h4>
+              </div>
+              <div class="bg-light p-3 rounded text-success fs-3">
+                <i class="bi bi-person-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marketplace Management Table -->
+      <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold m-0">
+            <i class="bi bi-shop me-2 text-primary"></i>Marketplace Products
+            Management
+          </h5>
+          <button
+            class="btn btn-outline-secondary btn-sm"
+            onclick="loadAdminData()"
+          >
+            <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Seller</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Product Reviews Management Table -->
+      <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold m-0">
+            <i class="bi bi-chat-left-text me-2 text-warning"></i>Product
+            Reviews Management (sanpham1)
+          </h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>User</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminReviewsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedUser = localStorage.getItem("currentuser");
+        if (savedUser) {
+          document.getElementById("displayuser").textContent = savedUser;
+          document.getElementById("statUser").textContent = savedUser;
+        } else {
+          window.location.href = "login.html";
+        }
+        loadAdminData();
+      });
+
+      document
+        .getElementById("btnlogout")
+        .addEventListener("click", function () {
+          localStorage.removeItem("currentuser");
+        });
+
+      function loadAdminData() {
+        renderAdminProducts();
+        renderAdminReviews();
+      }
+
+      function renderAdminProducts() {
+        const tableBody = document.getElementById("adminProductsTable");
+        tableBody.innerHTML = "";
+        const storedProducts = localStorage.getItem("ebuy_products");
+        const products = storedProducts ? JSON.parse(storedProducts) : [];
+
+        document.getElementById("statProducts").textContent = products.length;
+
+        if (products.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-4">No marketplace products found.</td></tr>`;
+          return;
+        }
+
+        products.forEach((p) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><small class="text-muted">${p.id}</small></td>
+            <td>
+              <div class="d-flex align-items-center">
+                <img src="${p.img}" alt="${p.title}" style="width: 40px; height: 40px; object-fit: cover;" class="rounded me-2" />
+                <span class="fw-semibold">${p.title}</span>
+              </div>
+            </td>
+            <td class="fw-bold text-danger">$${p.price}</td>
+            <td><span class="badge bg-light text-dark border">${p.seller || "User"}</span></td>
+            <td class="text-end">
+              <button class="btn btn-outline-danger btn-sm" onclick="deleteProduct(${p.id})">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      function deleteProduct(id) {
+        if (confirm("Are you sure you want to delete this product?")) {
+          const storedProducts = localStorage.getItem("ebuy_products");
+          let products = storedProducts ? JSON.parse(storedProducts) : [];
+          products = products.filter((p) => p.id !== id);
+          localStorage.setItem("ebuy_products", JSON.stringify(products));
+          renderAdminProducts();
+        }
+      }
+
+      function renderAdminReviews() {
+        const tableBody = document.getElementById("adminReviewsTable");
+        tableBody.innerHTML = "";
+        const storedReviews = localStorage.getItem("product_reviews_sanpham1");
+        const reviews = storedReviews ? JSON.parse(storedReviews) : [];
+
+        document.getElementById("statReviews").textContent = reviews.length;
+
+        if (reviews.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No reviews submitted yet.</td></tr>`;
+          return;
+        }
+
+        reviews.forEach((r) => {
+          let starsHtml = "";
+          for (let i = 1; i <= 5; i++) {
+            if (i <= r.rating) {
+              starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
+            } else {
+              starsHtml += '<i class="bi bi-star text-warning"></i>';
+            }
+          }
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td class="fw-semibold">${r.username}</td>
+            <td>${starsHtml}</td>
+            <td class="text-muted">${r.content}</td>
+            <td class="text-end">
+              <button class="btn btn-outline-danger btn-sm" onclick="deleteReview(${r.id})">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      function deleteReview(id) {
+        if (confirm("Are you sure you want to delete this review?")) {
+          const storedReviews = localStorage.getItem(
+            "product_reviews_sanpham1",
+          );
+          let reviews = storedReviews ? JSON.parse(storedReviews) : [];
+          reviews = reviews.filter((r) => r.id !== id);
+          localStorage.setItem(
+            "product_reviews_sanpham1",
+            JSON.stringify(reviews),
+          );
+          renderAdminReviews();
+        }
+      }
+    </script>
+  </body>
+</html>

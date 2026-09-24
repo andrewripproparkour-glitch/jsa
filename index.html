@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eBuy - Log In</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="maincard">
+      <div class="row g-0 align-items-stretch">
+        <div class="col-md-5 d-none d-md-block">
+          <div class="bannerstyle">
+            <div
+              id="authslide"
+              class="carousel slide carousel-fade h-100"
+              data-bs-ride="carousel"
+              data-bs-interval="5000"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#authslide"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#authslide"
+                  data-bs-slide-to="1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#authslide"
+                  data-bs-slide-to="2"
+                ></button>
+              </div>
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800"
+                    class="d-block w-100 h-100"
+                    alt="Shopping 1"
+                  />
+                  <div class="bannercaption">
+                    <h3>Discover Latest<br />Fashion Trends</h3>
+                  </div>
+                </div>
+                <div class="carousel-item h-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800"
+                    class="d-block w-100 h-100"
+                    alt="Shopping 2"
+                  />
+                  <div class="bannercaption">
+                    <h3>Exclusive Deals &<br />Big Savings</h3>
+                  </div>
+                </div>
+                <div class="carousel-item h-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800"
+                    class="d-block w-100 h-100"
+                    alt="Shopping 3"
+                  />
+                  <div class="bannercaption">
+                    <h3>Easy Online<br />Shopping Experience</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div
+            class="formsection h-100 d-flex flex-column justify-content-center"
+          >
+            <div class="formtitle">Welcome back</div>
+            <div class="formsubtitle">
+              Don't have an account? <a href="Signup.html">Sign up</a>
+            </div>
+            <form id="loginform">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  id="userInput"
+                  class="form-control"
+                  placeholder="Username or Email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="password"
+                  id="passInput"
+                  class="form-control"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div class="form-check m-0">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="remembercheck"
+                    checked
+                  />
+                  <label class="form-check-label" for="remembercheck">
+                    Remember me
+                  </label>
+                </div>
+                <a href="#" class="forgotlink">Forgot password?</a>
+              </div>
+              <button type="submit" class="btnsubmit">Log in</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById("loginform")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const userInput = document.getElementById("userInput").value.trim();
+          const passInput = document.getElementById("passInput").value;
+          const savedUser = JSON.parse(localStorage.getItem("ebuy_user"));
+
+          if (userInput === "admin" && passInput === "123") {
+            localStorage.setItem("currentuser", "Admin");
+            window.location.href = "admin.html";
+            return;
+          }
+
+          if (
+            savedUser &&
+            (userInput === savedUser.username ||
+              userInput === savedUser.email) &&
+            passInput === savedUser.password
+          ) {
+            // Lưu username vào localStorage để hiển thị ở home.html
+            localStorage.setItem(
+              "currentuser",
+              savedUser.username || userInput,
+            );
+            alert("Đăng nhập thành công!");
+            window.location.href = "home.html";
+            return;
+          }
+
+          alert("Tên đăng nhập hoặc mật khẩu không chính xác!");
+        });
+    </script>
+  </body>
+</html>

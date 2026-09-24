@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wireless Headphones - eBuy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="home.css" />
+    <style>
+      .star-rating .bi {
+        cursor: pointer;
+        transition:
+          color 0.15s ease-in-out,
+          transform 0.15s ease-in-out;
+      }
+      .star-rating .bi:hover {
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg topnavbar fixed-top">
+      <div class="container">
+        <a class="navbar-brand brandlogo" href="home.html">eBuy</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav me-3">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="sanpham.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-marketplace" href="#">Marketplace</a>
+            </li>
+          </ul>
+
+          <!-- Search Bar -->
+          <form class="d-flex searchform mx-lg-auto my-2 my-lg-0" role="search">
+            <input
+              class="form-control searchinput"
+              type="search"
+              placeholder="Search products, brands, categories..."
+              aria-label="Search"
+            />
+            <button class="btnsearch" type="submit">Search</button>
+          </form>
+
+          <!-- User Profile -->
+          <div class="userprofile ms-lg-3">
+            <span>Welcome, <strong id="displayuser">User</strong></span>
+            <a href="login.html" id="btnlogout" class="btnlogout">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="maincontent container" style="margin-top: 90px">
+      <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-5 text-center">
+            <div class="position-relative overflow-hidden rounded-4">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800"
+                alt="Wireless Headphones"
+                class="img-fluid rounded-4 w-100"
+                style="object-fit: cover; max-height: 400px"
+              />
+              <span
+                class="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2 fs-6 rounded-pill"
+                >Sale -23%</span
+              >
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h2 class="fw-bold mb-2">Wireless Headphones</h2>
+            <div class="d-flex align-items-center mb-3">
+              <div class="text-warning me-2">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+              <span class="text-muted small"
+                >(<span id="reviewCount">0</span> Reviews)</span
+              >
+            </div>
+
+            <div class="mb-4">
+              <span class="fs-2 fw-bold text-danger me-3">$99.00</span>
+              <span class="fs-5 text-muted text-decoration-line-through"
+                >$129.00</span
+              >
+            </div>
+            <div class="d-flex align-items-center mb-4">
+              <label class="fw-semibold me-3">Quantity:</label>
+              <div class="input-group" style="width: 140px">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="btnMinus"
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  id="buyQty"
+                  class="form-control text-center"
+                  value="1"
+                  min="1"
+                  max="99"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="btnPlus"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <button
+                class="btn btn-primary btn-lg flex-grow-1 rounded-3"
+                onclick="addToCart()"
+              >
+                <i class="bi bi-cart-plus me-2"></i>Add to Cart
+              </button>
+              <button
+                class="btn btn-danger btn-lg flex-grow-1 rounded-3"
+                onclick="buyNow()"
+              >
+                <i class="bi bi-bag-check me-2"></i>Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
+        <h4 class="fw-bold mb-4">
+          <i class="bi bi-chat-square-quote me-2 text-primary"></i>Customer
+          Reviews
+        </h4>
+
+        <!-- Review Input Form -->
+        <div class="card bg-light border-0 rounded-4 p-4 mb-4">
+          <h6 class="fw-bold mb-3">Write Your Review</h6>
+          <form id="reviewForm">
+            <div class="mb-3 d-flex align-items-center gap-3">
+              <label class="form-label mb-0 fw-semibold">Your Rating:</label>
+              <div class="star-rating text-warning fs-3" id="ratingContainer">
+                <i class="bi bi-star-fill star-btn" data-value="1"></i>
+                <i class="bi bi-star-fill star-btn" data-value="2"></i>
+                <i class="bi bi-star-fill star-btn" data-value="3"></i>
+                <i class="bi bi-star-fill star-btn" data-value="4"></i>
+                <i class="bi bi-star-fill star-btn" data-value="5"></i>
+              </div>
+              <span
+                class="badge bg-warning text-dark fs-6 rounded-pill"
+                id="ratingLabel"
+                >5 / 5 Stars</span
+              >
+            </div>
+            <div class="mb-3">
+              <textarea
+                id="reviewText"
+                class="form-control"
+                rows="3"
+                placeholder="Share your feedback about this product..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary px-4 rounded-pill">
+              Submit Review
+            </button>
+          </form>
+        </div>
+
+        <!-- Reviews List Container -->
+        <div id="reviewsList" class="d-flex flex-column gap-3"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedUser = localStorage.getItem("currentuser");
+        if (savedUser) {
+          document.getElementById("displayuser").textContent = savedUser;
+        } else {
+          window.location.href = "login.html";
+        }
+        loadReviews();
+      });
+
+      document
+        .getElementById("btnlogout")
+        .addEventListener("click", function () {
+          localStorage.removeItem("currentuser");
+        });
+
+      const qtyInput = document.getElementById("buyQty");
+      document.getElementById("btnMinus").addEventListener("click", () => {
+        if (parseInt(qtyInput.value) > 1)
+          qtyInput.value = parseInt(qtyInput.value) - 1;
+      });
+      document.getElementById("btnPlus").addEventListener("click", () => {
+        qtyInput.value = parseInt(qtyInput.value) + 1;
+      });
+
+      function addToCart() {
+        const qty = qtyInput.value;
+        alert(`Added ${qty} Wireless Headphones to cart!`);
+      }
+
+      function buyNow() {
+        const qty = qtyInput.value;
+        alert(
+          `Proceeding to checkout ${qty} Wireless Headphones. Total: $${(qty * 99).toFixed(2)}`,
+        );
+      }
+
+      let selectedRating = 5;
+      const stars = document.querySelectorAll(".star-btn");
+      const ratingLabel = document.getElementById("ratingLabel");
+
+      function renderStars(rating) {
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.classList.remove("bi-star");
+            s.classList.add("bi-star-fill");
+          } else {
+            s.classList.remove("bi-star-fill");
+            s.classList.add("bi-star");
+          }
+        });
+        ratingLabel.textContent = `${rating} / 5 Stars`;
+      }
+
+      stars.forEach((star) => {
+        star.addEventListener("mouseover", function () {
+          const hoverVal = parseInt(this.getAttribute("data-value"));
+          renderStars(hoverVal);
+        });
+
+        star.addEventListener("mouseout", function () {
+          renderStars(selectedRating);
+        });
+
+        star.addEventListener("click", function () {
+          selectedRating = parseInt(this.getAttribute("data-value"));
+          renderStars(selectedRating);
+        });
+      });
+
+      function getStoredReviews() {
+        const reviews = localStorage.getItem("product_reviews_sanpham1");
+        return reviews ? JSON.parse(reviews) : [];
+      }
+
+      function saveStoredReviews(reviews) {
+        localStorage.setItem(
+          "product_reviews_sanpham1",
+          JSON.stringify(reviews),
+        );
+      }
+
+      function renderReviewItem(item) {
+        let starsHtml = "";
+        for (let i = 1; i <= 5; i++) {
+          if (i <= item.rating) {
+            starsHtml += '<i class="bi bi-star-fill me-1"></i>';
+          } else {
+            starsHtml += '<i class="bi bi-star me-1"></i>';
+          }
+        }
+
+        const newReview = document.createElement("div");
+        newReview.className = "card border-0 bg-light p-3 rounded-3 mb-2";
+        newReview.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <strong class="text-dark me-2">${item.username}</strong>
+              <span class="text-warning fs-6">${starsHtml}</span>
+            </div>
+            <button class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-btn">
+              <i class="bi bi-trash me-1"></i>Delete
+            </button>
+          </div>
+          <p class="text-muted mb-0">${item.content}</p>
+        `;
+
+        newReview
+          .querySelector(".delete-btn")
+          .addEventListener("click", function () {
+            newReview.remove();
+            let reviews = getStoredReviews();
+            reviews = reviews.filter((r) => r.id !== item.id);
+            saveStoredReviews(reviews);
+            document.getElementById("reviewCount").textContent = reviews.length;
+          });
+
+        return newReview;
+      }
+
+      function loadReviews() {
+        const reviewsList = document.getElementById("reviewsList");
+        reviewsList.innerHTML = "";
+        const reviews = getStoredReviews();
+        reviews.forEach((item) => {
+          reviewsList.appendChild(renderReviewItem(item));
+        });
+        document.getElementById("reviewCount").textContent = reviews.length;
+      }
+
+      document
+        .getElementById("reviewForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const reviewText = document.getElementById("reviewText");
+          const content = reviewText.value.trim();
+          const username = localStorage.getItem("currentuser") || "User";
+
+          if (!content) return;
+
+          const newReviewObj = {
+            id: Date.now(),
+            username: username,
+            rating: selectedRating,
+            content: content,
+          };
+
+          const reviews = getStoredReviews();
+          reviews.unshift(newReviewObj);
+          saveStoredReviews(reviews);
+
+          loadReviews();
+
+          reviewText.value = "";
+          selectedRating = 5;
+          renderStars(5);
+        });
+    </script>
+  </body>
+</html>
