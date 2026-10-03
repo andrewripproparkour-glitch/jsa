@@ -124,6 +124,12 @@
                 </label>
               </div>
               <button type="submit" class="btnsubmit">Create account</button>
+              <p
+                class="small mt-3 mb-0"
+                id="registerMessage"
+                role="status"
+                aria-live="polite"
+              ></p>
             </form>
           </div>
         </div>
@@ -131,6 +137,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
     <script>
       document
         .getElementById("registerform")
@@ -140,8 +147,40 @@
           const username = document.getElementById("regUser").value.trim();
           const email = document.getElementById("regEmail").value.trim();
           const password = document.getElementById("regPass").value;
+          const normalizedUsername = window.eBuyAccounts.normalize(username);
+          const normalizedEmail = window.eBuyAccounts.normalize(email);
+          const users = window.eBuyAccounts.readUsers();
+          const message = document.getElementById("registerMessage");
+          if (normalizedUsername === "admin") {
+            message.className = "small mt-3 mb-0 text-danger";
+            message.textContent = "That username is reserved.";
+            document.getElementById("regUser").focus();
+            return;
+          }
 
-          // Lưu thông tin người dùng vào localStorage
+          const usernameExists = users.some(
+            (user) =>
+              window.eBuyAccounts.normalize(user.username) ===
+              normalizedUsername,
+          );
+          if (usernameExists) {
+            message.className = "small mt-3 mb-0 text-danger";
+            message.textContent = "That username is already registered.";
+            document.getElementById("regUser").focus();
+            return;
+          }
+
+          const emailExists = users.some(
+            (user) =>
+              window.eBuyAccounts.normalize(user.email) === normalizedEmail,
+          );
+          if (emailExists) {
+            message.className = "small mt-3 mb-0 text-danger";
+            message.textContent = "That email is already registered.";
+            document.getElementById("regEmail").focus();
+            return;
+          }
+
           const userData = {
             username: username,
             displayName: username,
@@ -149,7 +188,7 @@
             password: password,
           };
 
-          localStorage.setItem("ebuy_user", JSON.stringify(userData));
+          window.eBuyAccounts.saveUser(userData);
 
           alert(
             "Đăng ký tài khoản thành công! Chuyển hướng đến trang đăng nhập.",
