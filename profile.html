@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - eBuy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="proflie.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-xl topnavbar fixed-top">
+      <div class="container">
+        <a class="navbar-brand brandlogo" href="home.html">eBuy</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+          aria-controls="navmenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav me-3">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sanpham1.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="marketplace.html">Marketplace</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profile.html">Profile</a>
+            </li>
+          </ul>
+          <div class="userprofile ms-lg-auto">
+            <span>Welcome, <strong id="displayuser">User</strong></span>
+            <span class="text-nowrap"
+              >Balance: <strong data-wallet-balance>$0.00</strong></span
+            >
+            <button
+              class="btn btn-outline-primary btn-sm text-nowrap"
+              type="button"
+              data-wallet-open
+            >
+              Top up
+            </button>
+            <a href="index.html" id="btnlogout" class="btnlogout">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="profile-main container">
+      <header class="profile-heading">
+        <h1 class="h2 fw-bold mb-1">My Profile</h1>
+        <p class="text-muted mb-0" id="profileEmail"></p>
+      </header>
+
+      <div class="row g-4 mb-5">
+        <section class="col-lg-6" aria-labelledby="displayNameHeading">
+          <div class="profile-panel h-100">
+            <h2 id="displayNameHeading" class="h5 fw-bold mb-3">
+              Display name
+            </h2>
+            <form id="displayNameForm">
+              <label class="form-label" for="displayNameInput"
+                >Name shown on eBuy</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  id="displayNameInput"
+                  maxlength="25"
+                  required
+                />
+                <button class="btn btn-primary" type="submit">Save name</button>
+              </div>
+              <div
+                class="profile-message"
+                id="displayNameMessage"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+        </section>
+        <section class="col-lg-6" aria-labelledby="passwordHeading">
+          <div class="profile-panel h-100">
+            <h2 id="passwordHeading" class="h5 fw-bold mb-3">
+              Change password
+            </h2>
+            <form id="passwordForm">
+              <div class="mb-3">
+                <label class="form-label" for="currentPassword"
+                  >Current password</label
+                >
+                <input
+                  class="form-control"
+                  id="currentPassword"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="newPassword">New password</label>
+                <input
+                  class="form-control"
+                  id="newPassword"
+                  type="password"
+                  minlength="6"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+              <button class="btn btn-outline-primary" type="submit">
+                Update password
+              </button>
+              <div
+                class="profile-message"
+                id="passwordMessage"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <section
+        class="profile-panel profile-listing-panel mb-5"
+        aria-labelledby="submitProductHeading"
+      >
+        <div
+          class="profile-listing-heading d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4"
+        >
+          <div>
+            <span class="profile-eyebrow">SELLER STUDIO</span>
+            <h2 id="submitProductHeading" class="h3 fw-bold mb-1">
+              List your product
+            </h2>
+            <p class="text-muted mb-0">
+              Create a listing with three product photo URLs.
+            </p>
+          </div>
+          <span class="profile-photo-requirement"
+            ><i class="bi bi-images me-2"></i>3 photos required</span
+          >
+        </div>
+        <form id="profileProductForm" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="productName">Product name</label>
+            <input
+              class="form-control"
+              id="productName"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="productCategory">Category</label>
+            <select class="form-select" id="productCategory" required>
+              <option value="">Choose a category</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="productPrice">Price (USD)</label>
+            <input
+              class="form-control"
+              id="productPrice"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="productOldPrice"
+              >Old price (optional)</label
+            >
+            <input
+              class="form-control"
+              id="productOldPrice"
+              type="number"
+              min="0"
+              step="0.01"
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="productBadge"
+              >Badge (optional)</label
+            >
+            <input class="form-control" id="productBadge" maxlength="30" />
+          </div>
+          <div class="col-12">
+            <h3 class="h6 fw-bold mb-0">Product photos</h3>
+          </div>
+          <div class="col-12">
+            <div class="row g-3" id="productPhotoFields">
+              <div class="col-md-4 profile-photo-field">
+                <label class="form-label" for="productImage1"
+                  >Photo 1 URL</label
+                >
+                <input
+                  class="form-control product-image-url"
+                  id="productImage1"
+                  type="url"
+                  placeholder="https://..."
+                  required
+                />
+                <img
+                  id="productImagePreview1"
+                  class="profile-image-preview d-none mt-2"
+                  alt="Product photo 1 preview"
+                />
+              </div>
+              <div class="col-md-4 profile-photo-field">
+                <label class="form-label" for="productImage2"
+                  >Photo 2 URL</label
+                >
+                <input
+                  class="form-control product-image-url"
+                  id="productImage2"
+                  type="url"
+                  placeholder="https://..."
+                  required
+                />
+                <img
+                  id="productImagePreview2"
+                  class="profile-image-preview d-none mt-2"
+                  alt="Product photo 2 preview"
+                />
+              </div>
+              <div class="col-md-4 profile-photo-field">
+                <label class="form-label" for="productImage3"
+                  >Photo 3 URL</label
+                >
+                <input
+                  class="form-control product-image-url"
+                  id="productImage3"
+                  type="url"
+                  placeholder="https://..."
+                  required
+                />
+                <img
+                  id="productImagePreview3"
+                  class="profile-image-preview d-none mt-2"
+                  alt="Product photo 3 preview"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button
+              class="btn btn-outline-secondary btn-sm"
+              type="button"
+              id="addProductPhoto"
+            >
+              <i class="bi bi-plus-lg me-1"></i>Add another photo
+            </button>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="productDescription"
+              >Description</label
+            >
+            <textarea
+              class="form-control"
+              id="productDescription"
+              rows="3"
+              maxlength="1000"
+              required
+            ></textarea>
+          </div>
+          <div class="col-12 d-flex flex-wrap align-items-center gap-3">
+            <button class="btn btn-primary" type="submit">
+              <i class="bi bi-send me-1"></i>Send for verification
+            </button>
+            <span
+              id="productFormMessage"
+              class="profile-message"
+              role="status"
+              aria-live="polite"
+            ></span>
+          </div>
+        </form>
+      </section>
+
+      <section aria-labelledby="myProductsHeading">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 id="myProductsHeading" class="h4 fw-bold mb-0">My products</h2>
+          <span class="text-muted small" id="myProductCount">0 products</span>
+        </div>
+        <div class="row g-4" id="myProducts"></div>
+        <p class="profile-empty d-none" id="myProductsEmpty">
+          You have not listed any products yet.
+        </p>
+      </section>
+    </main>
+
+    <div
+      class="modal fade"
+      id="sellerProductReviewsModal"
+      tabindex="-1"
+      aria-labelledby="sellerProductReviewsTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="sellerProductReviewsTitle">
+              Product reviews
+            </h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="sellerProductReviewsList"
+              class="d-flex flex-column gap-3"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="product-categories.js"></script>
+    <script src="wallet.js"></script>
+    <script>
+      const USER_PRODUCTS_KEY = "eBuyUserProducts";
+      const currentUser = localStorage.getItem("currentuser");
+      if (!currentUser) window.location.href = "index.html";
+
+      function readAccount() {
+        try {
+          return JSON.parse(localStorage.getItem("ebuy_user") || "null");
+        } catch {
+          return null;
+        }
+      }
+
+      function readProducts(key) {
+        try {
+          const products = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(products) ? products : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function readProductReviews(productId) {
+        try {
+          const reviews = JSON.parse(
+            localStorage.getItem(`eBuyReviews_${productId}`) || "[]",
+          );
+          return Array.isArray(reviews) ? reviews : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function isHttpUrl(value) {
+        try {
+          return ["http:", "https:"].includes(new URL(value).protocol);
+        } catch {
+          return false;
+        }
+      }
+
+      function showMessage(elementId, text, isError = false) {
+        const message = document.getElementById(elementId);
+        message.className = `profile-message ${isError ? "text-danger" : "text-success"}`;
+        message.textContent = text;
+      }
+
+      const account = readAccount();
+      const displayName =
+        localStorage.getItem("currentdisplayname") ||
+        account?.displayName ||
+        currentUser;
+      document.getElementById("displayuser").textContent = displayName;
+      document.getElementById("profileEmail").textContent =
+        account?.email || "";
+      document.getElementById("displayNameInput").value = displayName;
+      window.EBUY_PRODUCT_CATEGORIES.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        document.getElementById("productCategory").appendChild(option);
+      });
+
+      document.getElementById("btnlogout").addEventListener("click", () => {
+        localStorage.removeItem("currentuser");
+        localStorage.removeItem("currentrole");
+        localStorage.removeItem("currentdisplayname");
+      });
+
+      document
+        .getElementById("displayNameForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const nextName = document
+            .getElementById("displayNameInput")
+            .value.trim();
+          if (!nextName || !account) {
+            showMessage(
+              "displayNameMessage",
+              "Unable to update this account.",
+              true,
+            );
+            return;
+          }
+          account.displayName = nextName;
+          localStorage.setItem("ebuy_user", JSON.stringify(account));
+          localStorage.setItem("currentdisplayname", nextName);
+          document.getElementById("displayuser").textContent = nextName;
+          showMessage("displayNameMessage", "Display name updated.");
+        });
+
+      document
+        .getElementById("passwordForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const currentPassword =
+            document.getElementById("currentPassword").value;
+          const newPassword = document.getElementById("newPassword").value;
+          if (!account || currentPassword !== account.password) {
+            showMessage(
+              "passwordMessage",
+              "Current password is incorrect.",
+              true,
+            );
+            return;
+          }
+          if (newPassword.length < 6) {
+            showMessage(
+              "passwordMessage",
+              "New password must be at least 6 characters.",
+              true,
+            );
+            return;
+          }
+          account.password = newPassword;
+          localStorage.setItem("ebuy_user", JSON.stringify(account));
+          event.target.reset();
+          showMessage("passwordMessage", "Password updated.");
+        });
+
+      const imageInputs = [...document.querySelectorAll(".product-image-url")];
+      function bindImagePreview(input) {
+        input.addEventListener("input", () => {
+          const preview = input.parentElement.querySelector(
+            ".profile-image-preview",
+          );
+          const value = input.value.trim();
+          if (!value || !input.checkValidity()) {
+            preview.classList.add("d-none");
+            preview.removeAttribute("src");
+            return;
+          }
+          preview.src = value;
+          preview.classList.remove("d-none");
+        });
+      }
+
+      imageInputs.forEach(bindImagePreview);
+      let photoInputCount = imageInputs.length;
+      document
+        .getElementById("addProductPhoto")
+        .addEventListener("click", () => {
+          photoInputCount += 1;
+          const field = document.createElement("div");
+          field.className = "col-md-4 profile-photo-field";
+          const label = document.createElement("label");
+          label.className = "form-label";
+          label.htmlFor = `productImage${photoInputCount}`;
+          label.textContent = `Photo ${photoInputCount} URL`;
+          const input = document.createElement("input");
+          input.className = "form-control product-image-url";
+          input.id = `productImage${photoInputCount}`;
+          input.type = "url";
+          input.placeholder = "https://...";
+          const preview = document.createElement("img");
+          preview.className = "profile-image-preview d-none mt-2";
+          preview.alt = `Product photo ${photoInputCount} preview`;
+          field.append(label, input, preview);
+          document.getElementById("productPhotoFields").appendChild(field);
+          imageInputs.push(input);
+          bindImagePreview(input);
+        });
+
+      function nextProductId() {
+        const allProducts = [
+          ...readProducts("eBuyProducts"),
+          ...readProducts("ebuy_products"),
+          ...readProducts(USER_PRODUCTS_KEY),
+        ];
+        const maxId = allProducts.reduce((highest, product) => {
+          const match = String(product.id).match(/^products-(\d+)$/);
+          return match ? Math.max(highest, Number(match[1])) : highest;
+        }, 4);
+        return `products-${maxId + 1}`;
+      }
+
+      function renderMyProducts() {
+        const products = readProducts(USER_PRODUCTS_KEY).filter(
+          (product) => product.owner === currentUser,
+        );
+        const container = document.getElementById("myProducts");
+        container.replaceChildren();
+        document.getElementById("myProductCount").textContent =
+          `${products.length} products`;
+        document
+          .getElementById("myProductsEmpty")
+          .classList.toggle("d-none", products.length > 0);
+        products.forEach((product) => {
+          const column = document.createElement("div");
+          column.className = "col-sm-6 col-lg-4";
+          const card = document.createElement("article");
+          card.className = "profile-product-row";
+          const image = document.createElement("img");
+          image.src = product.image;
+          image.alt = product.name;
+          const info = document.createElement("div");
+          info.className = "min-w-0 flex-grow-1";
+          const name = document.createElement("h3");
+          name.className = "h6 fw-bold text-truncate mb-1";
+          name.textContent = product.name;
+          const price = document.createElement("p");
+          price.className = "small text-muted mb-2";
+          price.textContent = `$${Number(product.price).toFixed(2)}`;
+          const status = document.createElement("span");
+          const statusClass = {
+            approved: "text-bg-success",
+            pending: "text-bg-warning",
+            rejected: "text-bg-danger",
+          };
+          status.className = `badge ${statusClass[product.status] || "text-bg-secondary"}`;
+          status.textContent = product.status || "pending";
+          const reviews = readProductReviews(product.id);
+          const reviewsButton = document.createElement("button");
+          reviewsButton.type = "button";
+          reviewsButton.className =
+            "btn btn-sm btn-outline-primary d-block mt-2";
+          reviewsButton.innerHTML = `<i class="bi bi-chat-square-text me-1" aria-hidden="true"></i>Reviews (${reviews.length})`;
+          reviewsButton.addEventListener("click", () =>
+            openSellerProductReviews(product),
+          );
+          info.append(name, price, status, reviewsButton);
+          card.append(image, info);
+          column.appendChild(card);
+          container.appendChild(column);
+        });
+      }
+
+      function openSellerProductReviews(product) {
+        const reviews = readProductReviews(product.id);
+        const reviewList = document.getElementById("sellerProductReviewsList");
+        reviewList.replaceChildren();
+        document.getElementById("sellerProductReviewsTitle").textContent =
+          `Reviews: ${product.name}`;
+
+        if (reviews.length === 0) {
+          const emptyState = document.createElement("p");
+          emptyState.className = "text-muted mb-0";
+          emptyState.textContent = "This product has no reviews yet.";
+          reviewList.appendChild(emptyState);
+        }
+
+        reviews.forEach((review) => {
+          const item = document.createElement("article");
+          item.className = "profile-review-item";
+          const heading = document.createElement("div");
+          heading.className =
+            "d-flex justify-content-between align-items-center gap-3 mb-2";
+          const reviewer = document.createElement("strong");
+          reviewer.textContent = review.username || "User";
+          const rating = document.createElement("span");
+          rating.className = "text-warning text-nowrap";
+          rating.textContent = `${Number(review.rating) || 0} / 5 stars`;
+          heading.append(reviewer, rating);
+          const content = document.createElement("p");
+          content.className = "mb-0";
+          content.textContent = review.content || "";
+          item.append(heading, content);
+
+          if (review.imageUrl && isHttpUrl(review.imageUrl)) {
+            const image = document.createElement("img");
+            image.src = review.imageUrl;
+            image.alt = `Photo attached by ${review.username || "User"}`;
+            image.className = "profile-review-photo mt-3";
+            item.appendChild(image);
+          }
+
+          reviewList.appendChild(item);
+        });
+
+        window.bootstrap.Modal.getOrCreateInstance(
+          document.getElementById("sellerProductReviewsModal"),
+        ).show();
+      }
+
+      document
+        .getElementById("profileProductForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const imageUrls = imageInputs
+            .map((input) => input.value.trim())
+            .filter(Boolean);
+          const hasValidImageUrls = imageInputs.every((input) => {
+            if (!input.value.trim()) return !input.required;
+            if (!input.checkValidity()) return false;
+            try {
+              return ["http:", "https:"].includes(
+                new URL(input.value).protocol,
+              );
+            } catch {
+              return false;
+            }
+          });
+          if (!currentUser || imageUrls.length < 3 || !hasValidImageUrls) {
+            showMessage(
+              "productFormMessage",
+              "Enter at least three valid image URLs before submitting.",
+              true,
+            );
+            return;
+          }
+          try {
+            const product = {
+              id: nextProductId(),
+              name: document.getElementById("productName").value.trim(),
+              category: document.getElementById("productCategory").value.trim(),
+              price: Number(document.getElementById("productPrice").value),
+              oldPrice:
+                Number(document.getElementById("productOldPrice").value) ||
+                null,
+              badge: document.getElementById("productBadge").value.trim(),
+              image: imageUrls[0],
+              images: imageUrls,
+              description: document
+                .getElementById("productDescription")
+                .value.trim(),
+              owner: currentUser,
+              ownerDisplayName: displayName,
+              status: "pending",
+              submittedAt: new Date().toISOString(),
+            };
+            const products = readProducts(USER_PRODUCTS_KEY);
+            products.push(product);
+            localStorage.setItem(USER_PRODUCTS_KEY, JSON.stringify(products));
+            event.target.reset();
+            imageInputs.forEach((input) => {
+              const preview = input.parentElement.querySelector(
+                ".profile-image-preview",
+              );
+              preview.removeAttribute("src");
+              preview.classList.add("d-none");
+            });
+            showMessage("productFormMessage", "Product sent for verification.");
+            renderMyProducts();
+          } catch (error) {
+            showMessage(
+              "productFormMessage",
+              error.message || "Could not save this product.",
+              true,
+            );
+          }
+        });
+
+      renderMyProducts();
+    </script>
+  </body>
+</html>

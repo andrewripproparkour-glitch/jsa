@@ -1,0 +1,112 @@
+.profile-main {
+	padding-top: 104px;
+	padding-bottom: 48px;
+}
+
+.profile-heading {
+	border-bottom: 1px solid #dee2e6;
+	margin-bottom: 1.5rem;
+	padding-bottom: 1rem;
+}
+
+.profile-panel {
+	background: #fff;
+	border: 1px solid #e9ecef;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.profile-message {
+	color: #198754;
+	font-size: 0.875rem;
+	margin-top: 0.75rem;
+	min-height: 1.25rem;
+}
+
+.profile-image-preview {
+	border: 1px solid #dee2e6;
+	border-radius: 6px;
+	height: 110px;
+	object-fit: cover;
+	width: 100%;
+	max-width: 240px;
+}
+
+.profile-listing-panel {
+	border-top: 4px solid #198754;
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.profile-listing-heading {
+	align-items: center;
+	border-bottom: 1px solid #e9ecef;
+	padding-bottom: 1rem;
+}
+
+.profile-eyebrow {
+	color: #198754;
+	display: block;
+	font-size: 0.72rem;
+	font-weight: 700;
+	margin-bottom: 0.35rem;
+}
+
+.profile-photo-requirement {
+	background: #e8f5ee;
+	border-radius: 6px;
+	color: #146c43;
+	font-size: 0.875rem;
+	font-weight: 600;
+	padding: 0.6rem 0.8rem;
+}
+
+.profile-photo-field {
+	background: #f8f9fa;
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	padding: 1rem;
+}
+
+.profile-product-row {
+	align-items: center;
+	background: #fff;
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	display: flex;
+	gap: 0.875rem;
+	height: 100%;
+	padding: 0.875rem;
+}
+
+.profile-product-row img {
+	aspect-ratio: 1;
+	border-radius: 6px;
+	flex: 0 0 72px;
+	object-fit: cover;
+	width: 72px;
+}
+
+.profile-review-item {
+	background: #fff;
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	padding: 1rem;
+}
+
+.profile-review-photo {
+	background: #f8f9fa;
+	border: 1px solid #e9ecef;
+	border-radius: 6px;
+	max-height: 280px;
+	max-width: min(100%, 420px);
+	object-fit: contain;
+}
+
+.profile-empty {
+	border: 1px dashed #ced4da;
+	border-radius: 8px;
+	color: #6c757d;
+	padding: 1.5rem;
+	text-align: center;
+}

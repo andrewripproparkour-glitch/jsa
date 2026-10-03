@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="home.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg topnavbar fixed-top">
+    <nav class="navbar navbar-expand-xl topnavbar fixed-top">
       <div class="container">
-        <a class="navbar-brand brandlogo" href="#">eBuy</a>
+        <a class="navbar-brand brandlogo" href="home.html">eBuy</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -25,18 +25,28 @@
         <div class="collapse navbar-collapse" id="navmenu">
           <ul class="navbar-nav me-3">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link active" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-marketplace" href="#">Marketplace</a>
+              <a class="nav-link nav-marketplace" href="marketplace.html"
+                >Marketplace</a
+              >
             </li>
           </ul>
-          <form class="d-flex searchform mx-lg-auto my-2 my-lg-0" role="search">
+          <form
+            class="d-flex searchform mx-lg-auto my-2 my-lg-0"
+            id="homeSearchForm"
+            role="search"
+          >
             <input
               class="form-control searchinput"
+              id="homeSearchInput"
               type="search"
               placeholder="Search products, brands, categories..."
               aria-label="Search"
@@ -46,7 +56,17 @@
 
           <div class="userprofile ms-lg-3">
             <span>Welcome, <strong id="displayuser">User</strong></span>
-            <a href="login.html" id="btnlogout" class="btnlogout">Log out</a>
+            <span class="text-nowrap"
+              >Balance: <strong data-wallet-balance>$0.00</strong></span
+            >
+            <button
+              class="btn btn-outline-primary btn-sm text-nowrap"
+              type="button"
+              data-wallet-open
+            >
+              Top up
+            </button>
+            <a href="index.html" id="btnlogout" class="btnlogout">Log out</a>
           </div>
         </div>
       </div>
@@ -150,96 +170,27 @@
       </div>
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="section-title">Featured Products</h3>
-        <a href="#" class="viewall-link">View all &rarr;</a>
       </div>
-      <div class="row g-4">
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <img
-                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600"
-                alt="Headphones"
-              />
-              <span class="badge-tag">Sale</span>
-            </div>
-            <div class="product-details">
-              <h5 class="product-title">Wireless Headphones</h5>
-              <div class="product-price">
-                <span class="price-current">$99.00</span>
-                <span class="price-old">$129.00</span>
-              </div>
-              <a href="sanpham1.html" class="btn-add-cart">Add to Cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <img
-                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600"
-                alt="Smart Watch"
-              />
-            </div>
-            <div class="product-details">
-              <h5 class="product-title">Smart Fitness Watch</h5>
-              <div class="product-price">
-                <span class="price-current">$149.00</span>
-              </div>
-              <button class="btn-add-cart">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sản phẩm 3 -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <img
-                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600"
-                alt="Running Shoes"
-              />
-              <span class="badge-tag bg-danger">Hot</span>
-            </div>
-            <div class="product-details">
-              <h5 class="product-title">Nike Sports Shoes</h5>
-              <div class="product-price">
-                <span class="price-current">$120.00</span>
-                <span class="price-old">$150.00</span>
-              </div>
-              <button class="btn-add-cart">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sản phẩm 4 -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <img
-                src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=600"
-                alt="Gaming Headset"
-              />
-            </div>
-            <div class="product-details">
-              <h5 class="product-title">RGB Gaming Headset</h5>
-              <div class="product-price">
-                <span class="price-current">$79.50</span>
-              </div>
-              <button class="btn-add-cart">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="row g-4" id="productGrid"></div>
+      <p
+        class="text-muted text-center border rounded p-3 d-none"
+        id="emptySearchState"
+        role="status"
+      >
+        No products match your search.
+      </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="wallet.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         const savedUser = localStorage.getItem("currentuser");
         if (savedUser) {
-          document.getElementById("displayuser").textContent = savedUser;
+          document.getElementById("displayuser").textContent =
+            localStorage.getItem("currentdisplayname") || savedUser;
         } else {
-          window.location.href = "login.html";
+          window.location.href = "index.html";
         }
       });
 
@@ -247,7 +198,193 @@
         .getElementById("btnlogout")
         .addEventListener("click", function () {
           localStorage.removeItem("currentuser");
+          localStorage.removeItem("currentrole");
+          localStorage.removeItem("currentdisplayname");
         });
+
+      const PRODUCTS_KEY = "eBuyProducts";
+      const DEFAULT_PRODUCTS = [
+        {
+          id: "products-1",
+          name: "Wireless Headphones",
+          category: "Electronics",
+          description:
+            "Clear sound and comfortable listening throughout your day.",
+          price: 99,
+          oldPrice: 129,
+          image:
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600",
+          badge: "Sale",
+        },
+        {
+          id: "products-2",
+          name: "Smart Fitness Watch",
+          category: "Electronics",
+          description:
+            "Track your activity and stay connected throughout the day.",
+          price: 149,
+          image:
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600",
+        },
+        {
+          id: "products-3",
+          name: "Nike Sports Shoes",
+          category: "Fashion",
+          description: "Lightweight running shoes for everyday training.",
+          price: 120,
+          oldPrice: 150,
+          image:
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600",
+          badge: "Hot",
+        },
+        {
+          id: "products-4",
+          name: "RGB Gaming Headset",
+          category: "Electronics",
+          description: "An immersive headset for gaming and everyday audio.",
+          price: 79.5,
+          image:
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=600",
+        },
+      ];
+
+      function readProducts(key) {
+        try {
+          const products = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(products) ? products : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function getProducts() {
+        const storedProducts = readProducts(PRODUCTS_KEY);
+        const savedProducts = DEFAULT_PRODUCTS.map((defaultProduct) => {
+          const savedProduct = storedProducts.find(
+            (product) =>
+              String(product.id) === defaultProduct.id ||
+              product.name === defaultProduct.name,
+          );
+          return savedProduct
+            ? { ...defaultProduct, ...savedProduct, id: defaultProduct.id }
+            : defaultProduct;
+        });
+        storedProducts.forEach((product) => {
+          const isDefaultProduct = DEFAULT_PRODUCTS.some(
+            (defaultProduct) =>
+              String(product.id) === defaultProduct.id ||
+              product.name === defaultProduct.name,
+          );
+          if (!isDefaultProduct) savedProducts.push(product);
+        });
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(savedProducts));
+        const productIds = new Set(
+          savedProducts.map((product) => String(product.id)),
+        );
+        const marketplaceProducts = readProducts("ebuy_products")
+          .filter((product) => product && product.id != null)
+          .map((product) => ({
+            ...product,
+            id: String(product.id),
+            name: product.name || product.title,
+            image: product.image || product.img,
+            category: product.category || "Marketplace",
+            description: product.description || "",
+            badge: product.badge || "Available",
+          }))
+          .filter((product) => !productIds.has(product.id));
+        return [
+          ...savedProducts,
+          ...marketplaceProducts.filter(
+            (product) => !productIds.has(product.id),
+          ),
+        ];
+      }
+
+      function renderProducts(searchTerm = "") {
+        const productGrid = document.getElementById("productGrid");
+        const normalizedTerm = searchTerm.trim().toLowerCase();
+        let visibleProductCount = 0;
+        productGrid.replaceChildren();
+        getProducts().forEach((product) => {
+          const productId = String(product.id ?? "");
+          const productName = String(product.name || product.title || "");
+          const productImage = product.image || product.img;
+          if (!productId || !productName || !productImage) return;
+          const searchableText =
+            `${productName} ${product.category || ""}`.toLowerCase();
+          if (!searchableText.includes(normalizedTerm)) return;
+          visibleProductCount += 1;
+
+          const column = document.createElement("div");
+          column.className = "col-6 col-md-4 col-lg-3";
+          const card = document.createElement("div");
+          card.className = "product-card";
+          const imageBox = document.createElement("div");
+          imageBox.className = "product-img-box";
+          const imageLink = document.createElement("a");
+          imageLink.href = `product-details.html?id=${encodeURIComponent(productId)}`;
+          const image = document.createElement("img");
+          image.src = productImage;
+          image.alt = productName;
+          imageLink.appendChild(image);
+          imageBox.appendChild(imageLink);
+
+          if (product.badge) {
+            const badge = document.createElement("span");
+            badge.className = "badge-tag";
+            badge.textContent = product.badge;
+            imageBox.appendChild(badge);
+          }
+
+          const details = document.createElement("div");
+          details.className = "product-details";
+          const title = document.createElement("h5");
+          title.className = "product-title";
+          const titleLink = document.createElement("a");
+          titleLink.href = `product-details.html?id=${encodeURIComponent(productId)}`;
+          titleLink.textContent = productName;
+          titleLink.className = "text-dark text-decoration-none";
+          title.appendChild(titleLink);
+          const price = document.createElement("div");
+          price.className = "product-price";
+          const currentPrice = document.createElement("span");
+          currentPrice.className = "price-current";
+          currentPrice.textContent = `$${Number(product.price || 0).toFixed(2)}`;
+          price.appendChild(currentPrice);
+
+          if (Number(product.oldPrice) > Number(product.price)) {
+            const oldPrice = document.createElement("span");
+            oldPrice.className = "price-old";
+            oldPrice.textContent = `$${Number(product.oldPrice).toFixed(2)}`;
+            price.appendChild(oldPrice);
+          }
+
+          const link = document.createElement("a");
+          link.className = "btn btn-primary mt-auto";
+          link.href = `product-details.html?id=${encodeURIComponent(productId)}`;
+          link.textContent = "View product";
+          details.append(title, price, link);
+          card.append(imageBox, details);
+          column.appendChild(card);
+          productGrid.appendChild(column);
+        });
+        document
+          .getElementById("emptySearchState")
+          .classList.toggle("d-none", visibleProductCount > 0);
+      }
+
+      const homeSearchInput = document.getElementById("homeSearchInput");
+      document
+        .getElementById("homeSearchForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          renderProducts(homeSearchInput.value);
+        });
+      homeSearchInput.addEventListener("input", () =>
+        renderProducts(homeSearchInput.value),
+      );
+      renderProducts(homeSearchInput.value);
     </script>
   </body>
 </html>

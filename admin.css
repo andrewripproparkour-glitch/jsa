@@ -281,3 +281,152 @@ body {
 .nav-marketplace:hover {
   color: #157347 !important;
 }
+
+.admin-navbar {
+  min-height: 76px;
+  padding: 0;
+  border-bottom: 1px solid #e8edf3;
+  box-shadow: 0 8px 24px rgba(22, 34, 51, 0.08);
+}
+
+.admin-navbar > .container {
+  min-height: 76px;
+}
+
+.admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  text-decoration: none;
+}
+
+.admin-brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: #e8f1ff;
+  color: #0d6efd;
+  font-size: 21px;
+}
+
+.admin-brand-copy,
+.admin-user-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-brand-name {
+  color: #172b4d;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.admin-brand-label {
+  margin-top: 4px;
+  color: #78869a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+}
+
+.admin-navbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-left: auto;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-user-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid #dce6f2;
+  border-radius: 50%;
+  background: #f5f8fc;
+  color: #426180;
+  font-size: 17px;
+}
+
+.admin-user-label {
+  color: #78869a;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.admin-user-copy strong {
+  max-width: 180px;
+  overflow: hidden;
+  color: #172b4d;
+  font-size: 14px;
+  text-overflow: ellipsis;
+}
+
+.admin-navbar .btnlogout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-color: #d9e1ea;
+  color: #44546f;
+}
+
+.admin-navbar .btnlogout:hover {
+  border-color: #dc3545;
+  color: #fff;
+}
+
+@media (max-width: 575.98px) {
+  .admin-navbar {
+    min-height: 68px;
+  }
+
+  .admin-navbar > .container {
+    min-height: 68px;
+  }
+
+  .admin-brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .admin-brand-label {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+  }
+
+  .admin-navbar-tools {
+    gap: 12px;
+  }
+
+  .admin-user-icon,
+  .admin-user-label {
+    display: none;
+  }
+
+  .admin-user-copy strong {
+    max-width: 88px;
+    font-size: 12px;
+  }
+
+  .admin-navbar .btnlogout {
+    width: 40px;
+    padding: 8px;
+  }
+
+  .admin-navbar .btnlogout span {
+    display: none;
+  }
+}

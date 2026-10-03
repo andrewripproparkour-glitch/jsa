@@ -5,10 +5,25 @@ body {
   padding: 0;
 }
 .topnavbar {
-  background-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  padding: 12px 0;
+  min-height: 76px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #e8edf3;
+  box-shadow: 0 8px 24px rgba(25, 42, 62, 0.08);
+  backdrop-filter: blur(12px);
   z-index: 1030;
+}
+
+.topnavbar > .container {
+  min-height: 76px;
+}
+
+.topnavbar .navbar-brand {
+  margin-right: 1.25rem;
+}
+
+.topnavbar .navbar-nav {
+  gap: 2px;
 }
 .brandlogo {
   font-weight: 800;
@@ -20,24 +35,35 @@ body {
 .nav-link {
   font-weight: 500;
   color: #495057;
+  padding: 0.58rem 0.78rem !important;
+  border-radius: 8px;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.topnavbar .nav-link:hover {
+  color: #0d6efd;
+  background-color: #f3f7fc;
 }
 
 .nav-link.active {
   color: #0d6efd !important;
+  background-color: #edf4ff;
 }
 
 /* Search Bar Styles */
 .searchform {
-  width: 100%;
-  max-width: 450px;
+  flex: 1 1 280px;
+  width: auto;
+  max-width: 360px;
   position: relative;
+  margin: 0 1.25rem;
 }
 
 .searchinput {
   background-color: #f1f3f5;
   border: 1px solid #dee2e6;
-  border-radius: 20px 0 0 20px;
-  padding: 8px 16px;
+  border-radius: 9px 0 0 9px;
+  padding: 9px 14px;
   font-size: 14px;
   color: #212529;
 }
@@ -52,8 +78,8 @@ body {
   background-color: #0d6efd;
   border: 1px solid #0d6efd;
   color: #ffffff;
-  border-radius: 0 20px 20px 0;
-  padding: 8px 20px;
+  border-radius: 0 9px 9px 0;
+  padding: 9px 16px;
   font-size: 14px;
   font-weight: 600;
   transition: background-color 0.2s;
@@ -68,7 +94,8 @@ body {
 .userprofile {
   display: flex;
   align-items: center;
-  gap: 15px;
+  flex-wrap: nowrap;
+  gap: 12px;
   color: #495057;
   font-size: 14.5px;
   white-space: nowrap;
@@ -166,6 +193,12 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.product-review-photo {
+  background-color: #f1f3f5;
+  height: 240px;
+  object-fit: contain;
 }
 
 .badge-tag {
@@ -282,4 +315,44 @@ body {
 
 .nav-marketplace:hover {
   color: #157347 !important;
+}
+
+.topnavbar .navbar-toggler {
+  border-color: #dce4ee;
+  border-radius: 9px;
+  padding: 0.45rem 0.6rem;
+}
+
+.topnavbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.14);
+}
+
+@media (max-width: 1199.98px) {
+  .topnavbar {
+    min-height: 68px;
+  }
+
+  .topnavbar > .container {
+    min-height: 68px;
+  }
+
+  .topnavbar .navbar-collapse {
+    padding: 0.5rem 0 1rem;
+  }
+
+  .topnavbar .navbar-nav {
+    align-items: stretch;
+  }
+
+  .searchform {
+    flex-basis: auto;
+    max-width: none;
+    margin: 0.5rem 0 !important;
+  }
+
+  .userprofile {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    white-space: normal;
+  }
 }

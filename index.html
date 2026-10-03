@@ -136,6 +136,8 @@
 
           if (userInput === "admin" && passInput === "123") {
             localStorage.setItem("currentuser", "Admin");
+            localStorage.setItem("currentrole", "admin");
+            localStorage.removeItem("currentdisplayname");
             window.location.href = "admin.html";
             return;
           }
@@ -151,11 +153,15 @@
               "currentuser",
               savedUser.username || userInput,
             );
+            localStorage.setItem(
+              "currentdisplayname",
+              savedUser.displayName || savedUser.username || userInput,
+            );
+            localStorage.setItem("currentrole", "user");
             alert("Đăng nhập thành công!");
             window.location.href = "home.html";
             return;
           }
-
           alert("Tên đăng nhập hoặc mật khẩu không chính xác!");
         });
     </script>

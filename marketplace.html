@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace - eBuy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="marketplace.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-xl topnavbar fixed-top">
+      <div class="container">
+        <a class="navbar-brand brandlogo" href="home.html">eBuy</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+          aria-controls="navmenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav me-3">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sanpham1.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active nav-marketplace" href="marketplace.html"
+                >Marketplace</a
+              >
+            </li>
+          </ul>
+          <form
+            class="d-flex searchform mx-lg-auto my-2 my-lg-0"
+            id="marketplaceSearchForm"
+            role="search"
+          >
+            <input
+              class="form-control searchinput"
+              id="marketplaceSearchInput"
+              type="search"
+              placeholder="Search marketplace products..."
+              aria-label="Search marketplace products"
+            />
+            <button class="btnsearch" type="submit">Search</button>
+          </form>
+          <div class="userprofile ms-lg-auto">
+            <span>Welcome, <strong id="displayuser">User</strong></span>
+            <span class="text-nowrap"
+              >Balance: <strong data-wallet-balance>$0.00</strong></span
+            >
+            <button
+              class="btn btn-outline-primary btn-sm text-nowrap"
+              type="button"
+              data-wallet-open
+            >
+              Top up
+            </button>
+            <a href="index.html" id="btnlogout" class="btnlogout">Log out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="marketplace-main container">
+      <header class="marketplace-heading mb-4">
+        <h1 class="h2 fw-bold mb-1">Marketplace</h1>
+        <p class="text-muted mb-0">
+          Products listed here have been approved by the admin.
+        </p>
+      </header>
+
+      <section aria-labelledby="approvedProductsHeading">
+        <div class="row g-3 align-items-end mb-3">
+          <div class="col-md-7">
+            <h2 id="approvedProductsHeading" class="h4 fw-bold mb-0">
+              Available products
+            </h2>
+          </div>
+          <div class="col-md-5">
+            <label class="form-label mb-1" for="categoryFilter">Category</label>
+            <select class="form-select" id="categoryFilter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <span class="text-muted small" id="approvedProductCount"
+              >0 products</span
+            >
+          </div>
+        </div>
+        <div class="row g-4" id="approvedProducts"></div>
+        <p class="marketplace-empty d-none" id="approvedProductsEmpty">
+          No approved products are available yet.
+        </p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="product-categories.js"></script>
+    <script src="wallet.js"></script>
+    <script>
+      const currentUser = localStorage.getItem("currentuser");
+      if (!currentUser) window.location.href = "index.html";
+      else
+        document.getElementById("displayuser").textContent =
+          localStorage.getItem("currentdisplayname") || currentUser;
+
+      document.getElementById("btnlogout").addEventListener("click", () => {
+        localStorage.removeItem("currentuser");
+        localStorage.removeItem("currentrole");
+        localStorage.removeItem("currentdisplayname");
+      });
+
+      function readProducts(key) {
+        try {
+          const products = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(products) ? products : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function createProductCard(product) {
+        const column = document.createElement("div");
+        column.className = "col-6 col-md-4 col-lg-3";
+        const card = document.createElement("article");
+        card.className = "product-card";
+        const imageBox = document.createElement("div");
+        imageBox.className = "product-img-box";
+        const imageLink = document.createElement("a");
+        imageLink.href = `product-details.html?id=${encodeURIComponent(product.id)}`;
+        const image = document.createElement("img");
+        image.src = product.image;
+        image.alt = product.name;
+        imageLink.appendChild(image);
+        imageBox.appendChild(imageLink);
+
+        const details = document.createElement("div");
+        details.className = "product-details";
+        const title = document.createElement("h3");
+        title.className = "product-title";
+        const titleLink = document.createElement("a");
+        titleLink.href = imageLink.href;
+        titleLink.className = "text-dark text-decoration-none";
+        titleLink.textContent = product.name;
+        title.appendChild(titleLink);
+        const category = document.createElement("span");
+        category.className = "small text-muted mb-2";
+        category.textContent = product.category || "Other";
+        const price = document.createElement("div");
+        price.className = "product-price";
+        const currentPrice = document.createElement("span");
+        currentPrice.className = "price-current";
+        currentPrice.textContent = `$${Number(product.price).toFixed(2)}`;
+        price.appendChild(currentPrice);
+        if (Number(product.oldPrice) > Number(product.price)) {
+          const oldPrice = document.createElement("span");
+          oldPrice.className = "price-old";
+          oldPrice.textContent = `$${Number(product.oldPrice).toFixed(2)}`;
+          price.appendChild(oldPrice);
+        }
+        details.append(title, category, price);
+
+        const viewLink = document.createElement("a");
+        viewLink.className = "btn btn-primary mt-auto";
+        viewLink.href = imageLink.href;
+        viewLink.textContent = "View product";
+        details.appendChild(viewLink);
+        card.append(imageBox, details);
+        column.appendChild(card);
+        return column;
+      }
+
+      function renderProductList(containerId, emptyId, products) {
+        const container = document.getElementById(containerId);
+        container.replaceChildren(
+          ...products.map((product) => createProductCard(product)),
+        );
+        document
+          .getElementById(emptyId)
+          .classList.toggle("d-none", products.length > 0);
+      }
+
+      function getApprovedProducts() {
+        const submissions = readProducts("eBuyUserProducts");
+        const submittedIds = new Set(
+          submissions.map((product) => String(product.id)),
+        );
+        const approvedProducts = [
+          ...submissions.filter((product) => product.status === "approved"),
+          ...readProducts("ebuy_products")
+            .filter((product) => product && product.id != null)
+            .filter((product) => !submittedIds.has(String(product.id)))
+            .map((product) => ({
+              ...product,
+              id: String(product.id),
+              name: product.name || product.title,
+              image: product.image || product.img,
+              category: product.category || "Other",
+              status: "approved",
+            })),
+        ];
+        return approvedProducts;
+      }
+
+      function populateCategoryFilter(products) {
+        const filter = document.getElementById("categoryFilter");
+        const selectedCategory = filter.value;
+        const availableCategories = new Set(window.EBUY_PRODUCT_CATEGORIES);
+        products.forEach((product) => {
+          if (product.category) availableCategories.add(product.category);
+        });
+        filter.replaceChildren(new Option("All categories", ""));
+        [...availableCategories].forEach((category) => {
+          filter.add(new Option(category, category));
+        });
+        filter.value = availableCategories.has(selectedCategory)
+          ? selectedCategory
+          : "";
+      }
+
+      function renderMarketplace() {
+        const products = getApprovedProducts();
+        populateCategoryFilter(products);
+        const selectedCategory =
+          document.getElementById("categoryFilter").value;
+        const searchTerm = document
+          .getElementById("marketplaceSearchInput")
+          .value.trim()
+          .toLowerCase();
+        const visibleProducts = products.filter((product) => {
+          const matchesCategory =
+            !selectedCategory || product.category === selectedCategory;
+          const searchableText =
+            `${product.name || product.title || ""} ${product.category || ""} ${product.description || ""}`.toLowerCase();
+          return matchesCategory && searchableText.includes(searchTerm);
+        });
+        document.getElementById("approvedProductCount").textContent =
+          `${visibleProducts.length} products`;
+        document.getElementById("approvedProductsEmpty").textContent =
+          searchTerm || selectedCategory
+            ? "No products match your filters."
+            : "No approved products are available yet.";
+        renderProductList(
+          "approvedProducts",
+          "approvedProductsEmpty",
+          visibleProducts,
+        );
+      }
+
+      document
+        .getElementById("categoryFilter")
+        .addEventListener("change", renderMarketplace);
+      document
+        .getElementById("marketplaceSearchForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          renderMarketplace();
+        });
+      document
+        .getElementById("marketplaceSearchInput")
+        .addEventListener("input", renderMarketplace);
+      renderMarketplace();
+    </script>
+  </body>
+</html>

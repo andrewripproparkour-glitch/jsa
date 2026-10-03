@@ -12,42 +12,46 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg topnavbar fixed-top">
+    <nav class="navbar topnavbar admin-navbar fixed-top" aria-label="Admin">
       <div class="container">
-        <a class="navbar-brand brandlogo" href=""
-          >eBuy <span class="badge bg-dark fs-6 ms-1">Admin</span></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navmenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="">Home Site</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">Products</a>
-            </li>
-          </ul>
-
-          <div class="userprofile ms-lg-3">
-            <span>Admin: <strong id="displayuser">Admin</strong></span>
-            <a href="login.html" id="btnlogout" class="btnlogout">Log out</a>
+        <a class="navbar-brand brandlogo admin-brand" href="admin.html">
+          <span class="admin-brand-mark" aria-hidden="true">
+            <i class="bi bi-bag-check-fill"></i>
+          </span>
+          <span class="admin-brand-copy">
+            <span class="admin-brand-name">eBuy</span>
+            <span class="admin-brand-label">ADMIN WORKSPACE</span>
+          </span>
+        </a>
+        <div class="admin-navbar-tools">
+          <div class="admin-user">
+            <span class="admin-user-icon" aria-hidden="true">
+              <i class="bi bi-person-fill"></i>
+            </span>
+            <span class="admin-user-copy">
+              <span class="admin-user-label">Signed in as</span>
+              <strong id="displayuser">Admin</strong>
+            </span>
           </div>
+          <a
+            href="index.html"
+            id="btnlogout"
+            class="btnlogout"
+            aria-label="Log out"
+          >
+            <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+            <span>Log out</span>
+          </a>
         </div>
       </div>
     </nav>
 
     <!-- Main Admin Container -->
-    <div class="maincontent container" style="margin-top: 90px">
+    <div class="maincontent container">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold m-0">Admin Control Panel</h3>
       </div>
@@ -103,56 +107,173 @@
         </div>
       </div>
 
-      <!-- Marketplace Management Table -->
-      <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="fw-bold m-0">
-            <i class="bi bi-shop me-2 text-primary"></i>Marketplace Products
-            Management
-          </h5>
+      <ul class="nav nav-tabs mb-3" id="adminProductTabs" role="tablist">
+        <li class="nav-item" role="presentation">
           <button
-            class="btn btn-outline-secondary btn-sm"
-            onclick="loadAdminData()"
+            class="nav-link active"
+            id="products-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#products-pane"
+            type="button"
+            role="tab"
+            aria-controls="products-pane"
+            aria-selected="true"
           >
-            <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+            Products
           </button>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>ID</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Seller</th>
-                <th class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminProductsTable"></tbody>
-          </table>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="verify-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#verify-pane"
+            type="button"
+            role="tab"
+            aria-controls="verify-pane"
+            aria-selected="false"
+          >
+            Products to verify
+            <span
+              class="badge bg-warning text-dark ms-1"
+              id="pendingProductCount"
+              >0</span
+            >
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <section
+          class="tab-pane fade show active"
+          id="products-pane"
+          role="tabpanel"
+          aria-labelledby="products-tab"
+          tabindex="0"
+        >
+          <!-- Marketplace Management Table -->
+          <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold m-0">
+                <i class="bi bi-shop me-2 text-primary"></i>Marketplace Products
+                Management
+              </h5>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                onclick="loadAdminData()"
+              >
+                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Seller</th>
+                    <th class="text-end">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section
+          class="tab-pane fade"
+          id="verify-pane"
+          role="tabpanel"
+          aria-labelledby="verify-tab"
+          tabindex="0"
+        >
+          <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold m-0">
+                <i class="bi bi-shield-check me-2 text-success"></i>Product
+                verification
+              </h5>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                type="button"
+                onclick="renderMarketplaceSubmissions()"
+              >
+                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Product photo and details</th>
+                    <th>Price</th>
+                    <th>Seller</th>
+                    <th class="text-end">Review</th>
+                  </tr>
+                </thead>
+                <tbody id="pendingMarketplaceProducts"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div
+        class="modal fade"
+        id="productReviewImageModal"
+        tabindex="-1"
+        aria-labelledby="productReviewImageTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="productReviewImageTitle">
+                Product photo
+              </h2>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div id="productReviewImages" class="row g-3 mb-3"></div>
+              <p class="mb-0 text-muted" id="productReviewDescription"></p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Product Reviews Management Table -->
-      <div class="card border-0 shadow-sm p-4 mb-5 bg-white">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="fw-bold m-0">
-            <i class="bi bi-chat-left-text me-2 text-warning"></i>Product
-            Reviews Management (sanpham1)
-          </h5>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>User</th>
-                <th>Rating</th>
-                <th>Comment</th>
-                <th class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminReviewsTable"></tbody>
-          </table>
+      <div
+        class="modal fade"
+        id="productReviewsModal"
+        tabindex="-1"
+        aria-labelledby="productReviewsTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="productReviewsTitle">
+                Product reviews
+              </h2>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div
+                id="adminProductReviews"
+                class="d-flex flex-column gap-3"
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -161,11 +282,12 @@
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         const savedUser = localStorage.getItem("currentuser");
-        if (savedUser) {
+        if (savedUser && localStorage.getItem("currentrole") === "admin") {
           document.getElementById("displayuser").textContent = savedUser;
           document.getElementById("statUser").textContent = savedUser;
         } else {
-          window.location.href = "login.html";
+          window.location.href = "index.html";
+          return;
         }
         loadAdminData();
       });
@@ -174,11 +296,132 @@
         .getElementById("btnlogout")
         .addEventListener("click", function () {
           localStorage.removeItem("currentuser");
+          localStorage.removeItem("currentrole");
+          localStorage.removeItem("currentdisplayname");
         });
 
       function loadAdminData() {
         renderAdminProducts();
-        renderAdminReviews();
+        renderMarketplaceSubmissions();
+        updateReviewCount();
+      }
+
+      function readMarketplaceSubmissions() {
+        try {
+          const products = JSON.parse(
+            localStorage.getItem("eBuyUserProducts") || "[]",
+          );
+          return Array.isArray(products) ? products : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function renderMarketplaceSubmissions() {
+        const tableBody = document.getElementById("pendingMarketplaceProducts");
+        const pendingProducts = readMarketplaceSubmissions().filter(
+          (product) => product.status === "pending",
+        );
+        document.getElementById("pendingProductCount").textContent =
+          pendingProducts.length;
+        tableBody.replaceChildren();
+
+        if (pendingProducts.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No products waiting for review.</td></tr>`;
+          return;
+        }
+
+        pendingProducts.forEach((product) => {
+          const row = document.createElement("tr");
+          const productCell = document.createElement("td");
+          const previewButton = document.createElement("button");
+          previewButton.type = "button";
+          previewButton.className =
+            "btn btn-link p-0 text-start text-decoration-none";
+          previewButton.setAttribute(
+            "aria-label",
+            `View photo of ${product.name}`,
+          );
+          const image = document.createElement("img");
+          image.src = product.image;
+          image.alt = product.name;
+          image.className = "rounded me-2";
+          image.style.cssText = "width: 64px; height: 56px; object-fit: cover;";
+          previewButton.appendChild(image);
+          previewButton.addEventListener("click", () =>
+            showProductReviewImage(product),
+          );
+          const name = document.createElement("button");
+          name.type = "button";
+          name.className = "btn btn-link fw-semibold text-decoration-none p-0";
+          name.textContent = product.name;
+          name.addEventListener("click", () =>
+            openProductReviews(product.id, product.name),
+          );
+          const sellerCell = document.createElement("td");
+          sellerCell.textContent =
+            product.ownerDisplayName || product.submittedBy || product.owner;
+          productCell.append(previewButton, name);
+          const priceCell = document.createElement("td");
+          priceCell.textContent = `$${Number(product.price).toFixed(2)}`;
+          const actionsCell = document.createElement("td");
+          actionsCell.className = "text-end";
+
+          const approveButton = document.createElement("button");
+          approveButton.type = "button";
+          approveButton.className = "btn btn-success btn-sm me-2";
+          approveButton.innerHTML = '<i class="bi bi-check-lg"></i> Approve';
+          approveButton.addEventListener("click", () =>
+            reviewMarketplaceProduct(product.id, "approved"),
+          );
+          const rejectButton = document.createElement("button");
+          rejectButton.type = "button";
+          rejectButton.className = "btn btn-outline-danger btn-sm";
+          rejectButton.innerHTML = '<i class="bi bi-x-lg"></i> Reject';
+          rejectButton.addEventListener("click", () =>
+            reviewMarketplaceProduct(product.id, "rejected"),
+          );
+          actionsCell.append(approveButton, rejectButton);
+          row.append(productCell, priceCell, sellerCell, actionsCell);
+          tableBody.appendChild(row);
+        });
+      }
+
+      function reviewMarketplaceProduct(productId, status) {
+        const products = readMarketplaceSubmissions().map((product) =>
+          String(product.id) === String(productId)
+            ? { ...product, status, reviewedAt: new Date().toISOString() }
+            : product,
+        );
+        localStorage.setItem("eBuyUserProducts", JSON.stringify(products));
+        renderMarketplaceSubmissions();
+        renderAdminProducts();
+      }
+
+      function showProductReviewImage(product) {
+        document.getElementById("productReviewImageTitle").textContent =
+          product.name;
+        const imageContainer = document.getElementById("productReviewImages");
+        imageContainer.replaceChildren();
+        const photos =
+          Array.isArray(product.images) && product.images.length
+            ? product.images
+            : [product.image];
+        photos.forEach((photoUrl, index) => {
+          const column = document.createElement("div");
+          column.className = "col-sm-6 col-lg-4";
+          const image = document.createElement("img");
+          image.src = photoUrl;
+          image.alt = `${product.name}, photo ${index + 1}`;
+          image.className = "img-fluid rounded w-100 product-review-photo";
+          column.appendChild(image);
+          imageContainer.appendChild(column);
+        });
+        document.getElementById("productReviewDescription").textContent =
+          `${product.category} · $${Number(product.price).toFixed(2)} · Seller: ${product.ownerDisplayName || product.submittedBy || product.owner}\n${product.description}`;
+        window.bootstrap.Modal.getOrCreateInstance(
+          document.getElementById("productReviewImageModal"),
+        ).show();
       }
 
       function renderAdminProducts() {
@@ -187,33 +430,118 @@
         const storedProducts = localStorage.getItem("ebuy_products");
         const products = storedProducts ? JSON.parse(storedProducts) : [];
 
-        document.getElementById("statProducts").textContent = products.length;
+        const approvedSellerProducts = readMarketplaceSubmissions().filter(
+          (product) => product.status === "approved",
+        );
+        document.getElementById("statProducts").textContent =
+          products.length + approvedSellerProducts.length;
 
-        if (products.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-4">No marketplace products found.</td></tr>`;
+        if (products.length === 0 && approvedSellerProducts.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No marketplace products found.</td></tr>`;
           return;
         }
 
         products.forEach((p) => {
           const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td><small class="text-muted">${p.id}</small></td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="${p.img}" alt="${p.title}" style="width: 40px; height: 40px; object-fit: cover;" class="rounded me-2" />
-                <span class="fw-semibold">${p.title}</span>
-              </div>
-            </td>
-            <td class="fw-bold text-danger">$${p.price}</td>
-            <td><span class="badge bg-light text-dark border">${p.seller || "User"}</span></td>
-            <td class="text-end">
-              <button class="btn btn-outline-danger btn-sm" onclick="deleteProduct(${p.id})">
-                <i class="bi bi-trash"></i> Delete
-              </button>
-            </td>
-          `;
+          const productCell = document.createElement("td");
+          const image = document.createElement("img");
+          image.src = p.img;
+          image.alt = p.title;
+          image.className = "rounded me-2";
+          image.style.cssText = "width: 40px; height: 40px; object-fit: cover;";
+          image.tabIndex = 0;
+          image.setAttribute("role", "button");
+          image.setAttribute("aria-label", `View reviews for ${p.title}`);
+          image.addEventListener("click", () =>
+            openProductReviews(p.id, p.title),
+          );
+          image.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openProductReviews(p.id, p.title);
+            }
+          });
+          const name = document.createElement("button");
+          name.type = "button";
+          name.className = "btn btn-link fw-semibold text-decoration-none p-0";
+          name.textContent = p.title;
+          name.addEventListener("click", () =>
+            openProductReviews(p.id, p.title),
+          );
+          productCell.append(image, name);
+          const priceCell = document.createElement("td");
+          priceCell.className = "fw-bold text-danger";
+          priceCell.textContent = `$${p.price}`;
+          const sellerCell = document.createElement("td");
+          sellerCell.textContent = p.seller || "User";
+          const actionsCell = document.createElement("td");
+          actionsCell.className = "text-end";
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.className = "btn btn-outline-danger btn-sm";
+          deleteButton.innerHTML = '<i class="bi bi-trash"></i> Delete';
+          deleteButton.addEventListener("click", () => deleteProduct(p.id));
+          actionsCell.appendChild(deleteButton);
+          tr.append(productCell, priceCell, sellerCell, actionsCell);
           tableBody.appendChild(tr);
         });
+
+        approvedSellerProducts.forEach((product) => {
+          const row = document.createElement("tr");
+          const productCell = document.createElement("td");
+          const image = document.createElement("img");
+          image.src = product.image;
+          image.alt = product.name;
+          image.className = "rounded me-2";
+          image.style.cssText = "width: 40px; height: 40px; object-fit: cover;";
+          image.tabIndex = 0;
+          image.setAttribute("role", "button");
+          image.setAttribute("aria-label", `View reviews for ${product.name}`);
+          image.addEventListener("click", () =>
+            openProductReviews(product.id, product.name),
+          );
+          image.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openProductReviews(product.id, product.name);
+            }
+          });
+          const name = document.createElement("button");
+          name.type = "button";
+          name.className = "btn btn-link fw-semibold text-decoration-none p-0";
+          name.textContent = product.name;
+          name.addEventListener("click", () =>
+            openProductReviews(product.id, product.name),
+          );
+          productCell.append(image, name);
+          const priceCell = document.createElement("td");
+          priceCell.className = "fw-bold text-danger";
+          priceCell.textContent = `$${Number(product.price).toFixed(2)}`;
+          const sellerCell = document.createElement("td");
+          sellerCell.textContent =
+            product.ownerDisplayName || product.submittedBy || product.owner;
+          const actionsCell = document.createElement("td");
+          actionsCell.className = "text-end";
+          const removeButton = document.createElement("button");
+          removeButton.className = "btn btn-outline-danger btn-sm";
+          removeButton.type = "button";
+          removeButton.textContent = "Remove";
+          removeButton.addEventListener("click", () =>
+            removeSellerProduct(product.id),
+          );
+          actionsCell.appendChild(removeButton);
+          row.append(productCell, priceCell, sellerCell, actionsCell);
+          tableBody.appendChild(row);
+        });
+      }
+
+      function removeSellerProduct(productId) {
+        const products = readMarketplaceSubmissions().filter(
+          (product) => String(product.id) !== String(productId),
+        );
+        localStorage.setItem("eBuyUserProducts", JSON.stringify(products));
+        renderMarketplaceSubmissions();
+        renderAdminProducts();
       }
 
       function deleteProduct(id) {
@@ -226,57 +554,122 @@
         }
       }
 
-      function renderAdminReviews() {
-        const tableBody = document.getElementById("adminReviewsTable");
-        tableBody.innerHTML = "";
-        const storedReviews = localStorage.getItem("product_reviews_sanpham1");
-        const reviews = storedReviews ? JSON.parse(storedReviews) : [];
-
-        document.getElementById("statReviews").textContent = reviews.length;
-
-        if (reviews.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No reviews submitted yet.</td></tr>`;
-          return;
+      function readReviews(key) {
+        try {
+          const reviews = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(reviews) ? reviews : [];
+        } catch {
+          return [];
         }
-
-        reviews.forEach((r) => {
-          let starsHtml = "";
-          for (let i = 1; i <= 5; i++) {
-            if (i <= r.rating) {
-              starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
-            } else {
-              starsHtml += '<i class="bi bi-star text-warning"></i>';
-            }
-          }
-
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td class="fw-semibold">${r.username}</td>
-            <td>${starsHtml}</td>
-            <td class="text-muted">${r.content}</td>
-            <td class="text-end">
-              <button class="btn btn-outline-danger btn-sm" onclick="deleteReview(${r.id})">
-                <i class="bi bi-trash"></i> Delete
-              </button>
-            </td>
-          `;
-          tableBody.appendChild(tr);
-        });
       }
 
-      function deleteReview(id) {
-        if (confirm("Are you sure you want to delete this review?")) {
-          const storedReviews = localStorage.getItem(
-            "product_reviews_sanpham1",
-          );
-          let reviews = storedReviews ? JSON.parse(storedReviews) : [];
-          reviews = reviews.filter((r) => r.id !== id);
-          localStorage.setItem(
-            "product_reviews_sanpham1",
-            JSON.stringify(reviews),
-          );
-          renderAdminReviews();
+      function isHttpUrl(value) {
+        try {
+          return ["http:", "https:"].includes(new URL(value).protocol);
+        } catch {
+          return false;
         }
+      }
+
+      function readProductList(key) {
+        try {
+          const products = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(products) ? products : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function getReviewKeys(productId) {
+        const keys = [`eBuyReviews_${productId}`];
+        if (String(productId) === "products-1") {
+          keys.push("product_reviews_sanpham1");
+        }
+        return keys;
+      }
+
+      function updateReviewCount() {
+        const productIds = new Set([
+          "products-1",
+          "products-2",
+          "products-3",
+          "products-4",
+        ]);
+        [
+          ...readMarketplaceSubmissions(),
+          ...readProductList("ebuy_products"),
+          ...readProductList("eBuyProducts"),
+        ].forEach((product) => productIds.add(String(product.id)));
+        const totalReviews = [...productIds].reduce(
+          (total, productId) =>
+            total +
+            getReviewKeys(productId).reduce(
+              (count, key) => count + readReviews(key).length,
+              0,
+            ),
+          0,
+        );
+        document.getElementById("statReviews").textContent = totalReviews;
+      }
+
+      function openProductReviews(productId, productName) {
+        const reviewList = document.getElementById("adminProductReviews");
+        reviewList.replaceChildren();
+        document.getElementById("productReviewsTitle").textContent =
+          `Reviews: ${productName}`;
+        const reviews = getReviewKeys(productId).flatMap((key) =>
+          readReviews(key).map((review) => ({ ...review, sourceKey: key })),
+        );
+
+        if (reviews.length === 0) {
+          const emptyState = document.createElement("p");
+          emptyState.className = "text-muted mb-0";
+          emptyState.textContent = "This product has no reviews yet.";
+          reviewList.appendChild(emptyState);
+        }
+
+        reviews.forEach((review) => {
+          const item = document.createElement("article");
+          item.className = "border rounded p-3";
+          const heading = document.createElement("div");
+          heading.className = "d-flex justify-content-between gap-3 mb-2";
+          const reviewer = document.createElement("strong");
+          reviewer.textContent = review.username || "User";
+          const rating = document.createElement("span");
+          rating.className = "text-warning text-nowrap";
+          rating.textContent = `${Number(review.rating) || 0} / 5 stars`;
+          heading.append(reviewer, rating);
+          const content = document.createElement("p");
+          content.className = "mb-3";
+          content.textContent = review.content || "";
+          item.append(heading, content);
+          if (review.imageUrl && isHttpUrl(review.imageUrl)) {
+            const image = document.createElement("img");
+            image.src = review.imageUrl;
+            image.alt = `Photo attached by ${review.username || "User"}`;
+            image.className = "img-fluid rounded mb-3 product-review-photo";
+            item.appendChild(image);
+          }
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.className = "btn btn-outline-danger btn-sm";
+          deleteButton.innerHTML =
+            '<i class="bi bi-trash me-1"></i>Delete review';
+          deleteButton.addEventListener("click", () => {
+            const remaining = readReviews(review.sourceKey).filter(
+              (savedReview) => savedReview.id !== review.id,
+            );
+            localStorage.setItem(review.sourceKey, JSON.stringify(remaining));
+            updateReviewCount();
+            openProductReviews(productId, productName);
+          });
+          item.appendChild(deleteButton);
+          reviewList.appendChild(item);
+        });
+
+        window.bootstrap.Modal.getOrCreateInstance(
+          document.getElementById("productReviewsModal"),
+        ).show();
       }
     </script>
   </body>

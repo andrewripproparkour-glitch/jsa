@@ -1,0 +1,49 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.marketplace-main {
+  padding-top: 100px;
+  padding-bottom: 48px;
+}
+
+.marketplace-heading {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1.25rem;
+}
+
+.marketplace-panel {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.marketplace-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.marketplace-product-code {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.marketplace-empty {
+  border: 1px dashed #ced4da;
+  border-radius: 8px;
+  color: #6c757d;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+#myProducts .product-card,
+#approvedProducts .product-card {
+  height: 100%;
+}
+
+#marketplaceFormMessage {
+  min-height: 1.5rem;
+}

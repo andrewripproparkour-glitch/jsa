@@ -79,7 +79,7 @@
           <div class="formsection">
             <div class="formtitle">Create an account</div>
             <div class="formsubtitle">
-              Already have an account? <a href="login.html">Log in</a>
+              Already have an account? <a href="index.html">Log in</a>
             </div>
             <form id="registerform">
               <div class="mb-3">
@@ -144,6 +144,7 @@
           // Lưu thông tin người dùng vào localStorage
           const userData = {
             username: username,
+            displayName: username,
             email: email,
             password: password,
           };
@@ -153,7 +154,7 @@
           alert(
             "Đăng ký tài khoản thành công! Chuyển hướng đến trang đăng nhập.",
           );
-          window.location.href = "login.html";
+          window.location.href = "index.html";
         });
     </script>
   </body>
