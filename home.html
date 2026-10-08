@@ -8,6 +8,16 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="home.css" />
   </head>
   <body>
@@ -19,6 +29,9 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navmenu"
+          aria-controls="navmenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,10 +44,7 @@
               <a class="nav-link" href="profile.html">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="sanpham1.html">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Categories</a>
+              <a class="nav-link" href="group.html">Groups</a>
             </li>
             <li class="nav-item">
               <a class="nav-link nav-marketplace" href="marketplace.html"
@@ -77,13 +87,20 @@
 
     <!-- Main Content -->
     <div class="maincontent container">
-      <!-- Banner Chào Mừng -->
-      <div class="welcomecard text-center p-4 mb-4">
-        <h1 class="welcometitle">Welcome back to eBuy!</h1>
-        <p class="welcomesubtitle">
-          Explore today's featured items and exclusive deals for you.
-        </p>
-      </div>
+      <header class="home-intro">
+        <div>
+          <span class="welcome-eyebrow">A BETTER WAY TO FIND IT</span>
+          <h1 class="welcometitle">Good finds. <span>Better days.</span></h1>
+          <p class="welcomesubtitle">
+            Thoughtful picks, everyday essentials, and little upgrades worth
+            discovering.
+          </p>
+        </div>
+        <a class="home-shop-link" href="sanpham1.html">
+          Shop all products
+          <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </header>
       <div
         id="promoCarousel"
         class="carousel slide promo-carousel mb-5 carousel-fade"
@@ -112,17 +129,20 @@
         <div class="carousel-inner rounded-4 overflow-hidden shadow-sm">
           <div class="carousel-item active">
             <img
-              src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200"
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1800"
               class="d-block w-100 promo-img"
-              alt="Big Sale Discounts"
+              alt="Friends exploring a fashion collection"
             />
-            <div class="carousel-caption d-none d-md-block text-start">
-              <span class="badge bg-danger mb-2">LIMITED TIME</span>
-              <h2 class="fw-bold text-white">MEGA SALE UP TO 50% OFF</h2>
-              <p>
-                Grab your favorite electronics and fashion items before sold
-                out!
-              </p>
+            <div class="carousel-caption promo-caption text-start">
+              <span class="promo-kicker">THE WEEKEND EDIT</span>
+              <h2 class="fw-bold text-white">
+                A little refresh looks good on you.
+              </h2>
+              <p>Fresh styles and everyday favorites, picked for the season.</p>
+              <a class="promo-link" href="sanpham1.html">
+                Explore the edit
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
           <div class="carousel-item">
@@ -131,10 +151,14 @@
               class="d-block w-100 promo-img"
               alt="Fashion Discount"
             />
-            <div class="carousel-caption d-none d-md-block text-start">
+            <div class="carousel-caption promo-caption text-start">
               <span class="badge bg-warning text-dark mb-2">NEW ARRIVALS</span>
               <h2 class="fw-bold text-white">Trending Fashion Deals</h2>
               <p>Upgrade your style with top global fashion brands today.</p>
+              <a class="promo-link" href="sanpham1.html">
+                Shop new arrivals
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
           <div class="carousel-item">
@@ -143,12 +167,16 @@
               class="d-block w-100 promo-img"
               alt="Tech Gadgets Promotion"
             />
-            <div class="carousel-caption d-none d-md-block text-start">
+            <div class="carousel-caption promo-caption text-start">
               <span class="badge bg-primary mb-2">TECH WEEK</span>
               <h2 class="fw-bold text-white">Best Tech & Gadgets</h2>
               <p>
                 Exclusive voucher discounts on smart accessories & audio gear.
               </p>
+              <a class="promo-link" href="sanpham1.html">
+                Discover tech
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -171,8 +199,14 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="section-title">Featured Products</h3>
+      <div class="featured-heading">
+        <div>
+          <span class="section-eyebrow">THE GOOD STUFF</span>
+          <h2 class="section-title">Picked for you</h2>
+        </div>
+        <a class="viewall-link" href="sanpham1.html">
+          View all <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
       <div class="row g-4" id="productGrid"></div>
       <p

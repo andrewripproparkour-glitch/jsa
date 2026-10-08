@@ -1,6 +1,7 @@
 body {
-  background-color: #f8f9fa;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f4f7fb;
+  background-image: linear-gradient(135deg, #f8fafc 0%, #eef4fb 52%, #f7f9fc 100%);
+  font-family: "DM Sans", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -129,44 +130,103 @@ body {
   padding-bottom: 40px;
 }
 
-.welcomecard {
-  background-color: #ffffff;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-  color: #212529;
+.home-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.welcome-eyebrow {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  color: #198754;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
 }
 
 .welcometitle {
-  font-weight: 700;
-  color: #0d6efd;
-  margin-bottom: 12px;
+  margin: 0 0 0.6rem;
+  color: #172b3d;
+  font-family: "Manrope", sans-serif;
+  font-size: 2.65rem;
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.welcometitle span {
+  color: #167c63;
 }
 
 .welcomesubtitle {
   color: #6c757d;
-  font-size: 16px;
-}
-/* Product Grid & Card Styling */
-.section-title {
-  font-weight: 700;
-  color: #212529;
-  font-size: 20px;
+  font-size: 1rem;
   margin: 0;
 }
 
+.home-shop-link,
+.promo-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-shop-link {
+  margin-bottom: 0.35rem;
+  color: #176d57;
+}
+
+.home-shop-link:hover {
+  color: #105440;
+}
+/* Product Grid & Card Styling */
+.section-title {
+  margin: 0;
+  color: #172b3d;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.featured-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+}
+
+.section-eyebrow {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #738292;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
 .viewall-link {
-  color: #0d6efd;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #176d57;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
 }
 
 .product-card {
-  background-color: #ffffff;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(220, 230, 241, 0.8);
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 24px rgba(31, 57, 86, 0.07);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
   display: flex;
@@ -269,43 +329,119 @@ body {
 }
 /* Promotional Carousel Styling */
 .promo-carousel {
-  border-radius: 16px;
+  position: relative;
+  isolation: isolate;
+  border-radius: 18px;
   overflow: hidden;
+  box-shadow: 0 20px 48px rgba(19, 34, 53, 0.16);
 }
 
 .promo-img {
-  height: 340px;
+  height: 410px;
   object-fit: cover;
-  filter: brightness(0.85); /* Tối nhẹ ảnh để chữ nổi bật hơn */
+  object-position: center 42%;
+  filter: saturate(0.86);
 }
 
-.promo-carousel .carousel-caption {
-  bottom: 30px;
-  left: 40px;
-  right: 40px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  padding: 20px 25px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+.promo-carousel .carousel-item::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(10, 20, 27, 0.5), transparent 82%),
+    linear-gradient(0deg, rgba(8, 15, 25, 0.58), transparent 75%);
+  content: "";
+  pointer-events: none;
 }
 
-.promo-carousel .carousel-caption h2 {
-  font-size: 26px;
-  letter-spacing: 0.5px;
-  margin-bottom: 5px;
+.promo-carousel .promo-caption {
+  z-index: 1;
+  right: auto;
+  bottom: 48px;
+  left: 56px;
+  width: min(610px, calc(100% - 112px));
+  padding: 24px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 14px;
+  background: rgba(14, 25, 32, 0.42);
+  box-shadow: 0 14px 38px rgba(8, 14, 22, 0.2);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.2);
 }
 
-.promo-carousel .carousel-caption p {
-  font-size: 14px;
-  color: #e9ecef;
-  margin: 0;
+.promo-kicker {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #a9e2d0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
 }
 
-@media (max-width: 768px) {
-  .promo-img {
-    height: 200px;
-  }
+.promo-caption h2 {
+  max-width: 500px;
+  font-family: "Manrope", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.promo-caption p {
+  max-width: 420px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 1rem;
+}
+
+.promo-link {
+  color: #fff;
+}
+
+.promo-link:hover {
+  color: #b8eadb;
+}
+
+.promo-carousel .carousel-indicators {
+  z-index: 2;
+  margin-bottom: 12px;
+}
+
+.promo-carousel .carousel-indicators [data-bs-target] {
+  width: 24px;
+  height: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border: 0;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.62);
+}
+
+.promo-carousel .carousel-indicators .active {
+  width: 38px;
+  background-color: #fff;
+}
+
+.promo-carousel .carousel-control-prev,
+.promo-carousel .carousel-control-next {
+  z-index: 2;
+  top: 50%;
+  bottom: auto;
+  width: 42px;
+  height: 42px;
+  margin: 0 18px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(14, 22, 32, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.promo-carousel .carousel-control-prev-icon,
+.promo-carousel .carousel-control-next-icon {
+  width: 1.15rem;
+  height: 1.15rem;
 }
 .nav-marketplace {
   font-weight: 600;
@@ -354,5 +490,70 @@ body {
     flex-wrap: wrap;
     gap: 10px 14px;
     white-space: normal;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .maincontent {
+    padding-top: 88px;
+  }
+
+  .home-intro {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .welcometitle {
+    font-size: 2rem;
+  }
+
+  .welcomesubtitle {
+    max-width: 34rem;
+    font-size: 0.9rem;
+  }
+
+  .home-shop-link {
+    margin-top: 0.9rem;
+  }
+
+  .promo-carousel {
+    border-radius: 14px;
+  }
+
+  .promo-img {
+    height: 350px;
+    object-position: 55% center;
+  }
+
+  .promo-carousel .promo-caption {
+    bottom: 38px;
+    left: 12px;
+    width: calc(100% - 24px);
+    padding: 14px 16px;
+    border-radius: 11px;
+  }
+
+  .promo-caption h2 {
+    font-size: 1.35rem;
+  }
+
+  .promo-caption p {
+    font-size: 0.82rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .featured-heading {
+    margin-top: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .promo-carousel .carousel-control-prev,
+  .promo-carousel .carousel-control-next {
+    width: 34px;
+    height: 34px;
+    margin: 0 10px;
   }
 }
