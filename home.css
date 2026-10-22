@@ -50,8 +50,6 @@ body {
   color: #0d6efd !important;
   background-color: #edf4ff;
 }
-
-/* Search Bar Styles */
 .searchform {
   flex: 1 1 280px;
   width: auto;
